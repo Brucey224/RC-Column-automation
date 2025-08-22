@@ -104,4 +104,4 @@ def plot_3d_cover_blocks():
 plot_3d_cover_blocks()
 
 # Example: plot one exposure class
-plot_heatmap_for_exposure("XC2")
+plot_heatmap_for_exposure("XC1")
