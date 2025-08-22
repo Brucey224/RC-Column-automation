@@ -1,0 +1,13 @@
+Imposed loads in buildings due to gravity,Picture,Picture,Picture
+"Category A: domestic, residential",0.7,0.5,0.3
+Category B: Office Areas,0.7,0.5,0.3
+Category C: Congregation areas,0.7,0.7,0.6
+Category D: Shopping areas,0.7,0.7,0.6
+Category E: Storage areas,1,0.9,0.8
+"Category F: Traffic area, Vehicle weight <30kN",0.7,0.7,0.6
+"Category G: Traffic area, Vehicle weight >30kN",0.7,0.5,0.3
+Category H: roofs,0.7,0,0
+Snow Loading (UK) - Sites > 1000m a.s.l,0.7,0.5,0.2
+Snow Loading (UK) - Sites < 1000m a.s.l,0.5,0.2,0
+Wind Loads (UK),0.5,0.2,0
+Temperature (non-fire),0.6,0.5,0
