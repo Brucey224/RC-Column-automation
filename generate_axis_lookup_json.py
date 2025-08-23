@@ -53,7 +53,7 @@ def parse_cell(cell):
 # If your headers differ, adapt the names below.
 
 def build_json_from_table(csv_path):
-    data = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(dict))))
+    data = defaultdict(lambda: {"omega": {}})
     with open(csv_path, newline="", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         REI = None
@@ -64,25 +64,27 @@ def build_json_from_table(csv_path):
                 continue
 
             if row["Mechanical reinforcement ratio"]:
-                omega = (row.get("Mechanical reinforcement ratio")).strip()
+                omega_val = (row.get("Mechanical reinforcement ratio")).strip()
             else:
                 print("error: missing omega")
                 continue
             try:
-                omega = float(omega)
+                omega_val = str(float(omega_val))  # Use string keys for JSON compatibility
             except ValueError:
                 print("error: invalid data for omega:")
                 continue
 
+            omega_dict = data[REI]["omega"]
+            if omega_val not in omega_dict:
+                omega_dict[omega_val] = {"n": {}}
+
             for n in ["0.15", "0.30", "0.50", "0.70"]:
                 cell = row.get(n)
-                if not cell or cell.strip().upper() == "NULL":
-                    continue
                 pts = parse_cell(cell)
                 dict_pts = [
                     {f"b_{i}": b, f"a_{i}": a} for i, (b, a) in enumerate(pts)
                 ]
-                data[REI]["omega"][omega]["n"][n] = dict_pts
+                omega_dict[omega_val]["n"][n] = dict_pts
     return data
 
 # Example usage:
