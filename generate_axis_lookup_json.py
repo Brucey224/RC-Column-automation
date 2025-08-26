@@ -16,19 +16,14 @@ n = [0.15, 0.30, 0.50, 0.70]
 omega = [0.1, 0.5, 1.0]
 
 def parse_cell(cell):
-    """
-    Parse a cell string like '150/30:200/25' into a sorted list of (b_min, a).
-    Returns [] if the cell is NULL/empty.
-    """
-    if not cell or str(cell).strip().upper() == "NULL":
-        return []
 
     parts = str(cell).split(":")
     pts = []
     for p in parts:
         m = PAIR_RE.fullmatch(p.strip())
         if not m:
-            # If you want to be strict, raise here. We'll be permissive and skip.
+            # raise an error when m is not vali
+            print(f"error: invalid data in cell: {cell})")
             continue
         b = float(m.group(1))
         a = float(m.group(2))
@@ -78,8 +73,9 @@ def build_json_from_table(csv_path):
             if omega_val not in omega_dict:
                 omega_dict[omega_val] = {"n": {}}
 
-            for n in ["0.15", "0.30", "0.50", "0.70"]:
+            for n in ["0.15", "0.3", "0.5", "0.7"]:
                 cell = row.get(n)
+                print(f"Processing REI={REI}, omega={omega_val}, n={n}, cell={cell}")
                 pts = parse_cell(cell)
                 dict_pts = [
                     {f"b_{i}": b, f"a_{i}": a} for i, (b, a) in enumerate(pts)
