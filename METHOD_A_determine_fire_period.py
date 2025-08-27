@@ -9,6 +9,7 @@ def determine_column_fire_period_method_A(G_k, Q_k, section, column, alpha_cc=0.
     mu_fi = max(mu_fi_y, mu_fi_z)
     omega = section.A_s*section.f_yd / (section.A_c*f_cd) #mechanical reinforcement ratio
     e_max = 0.15*section.h # mm
+    a = section.cover + section.link_dia + section.bar_diameter/2 # Compute axis distance to reinforcement
 
     if section.num_bars <= 4:
         R_n = 0
