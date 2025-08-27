@@ -22,9 +22,7 @@ def parse_cell(cell):
     for p in parts:
         m = PAIR_RE.fullmatch(p.strip())
         if not m:
-            # raise an error when m is not vali
-            print(f"error: invalid data in cell: {cell})")
-            continue
+            return None
         b = float(m.group(1))
         a = float(m.group(2))
         pts.append((b, a))
@@ -44,8 +42,7 @@ def parse_cell(cell):
 # 'Standard fire resistance' (REI category like 'REI 60')
 # 'Mechanical reinforcement ratio ω' (float like 0.100, 0.500, 1.000)
 # 'n = 0,15', 'n = 0,3', 'n = 0,5', 'n = 0,7'  (cell strings)
-#
-# If your headers differ, adapt the names below.
+
 
 def build_json_from_table(csv_path):
     data = defaultdict(lambda: {"omega": {}})
