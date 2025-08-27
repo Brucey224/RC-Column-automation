@@ -74,9 +74,12 @@ def build_json_from_table(csv_path):
                 cell = row.get(n)
                 print(f"Processing REI={REI}, omega={omega_val}, n={n}, cell={cell}")
                 pts = parse_cell(cell)
-                dict_pts = [
-                    {f"b_{i}": b, f"a_{i}": a} for i, (b, a) in enumerate(pts)
-                ]
+                if pts:
+                    dict_pts = [
+                        {f"b_{i}": b, f"a_{i}": a} for i, (b, a) in enumerate(pts)
+                    ]
+                else:
+                    dict_pts = "NULL"
                 omega_dict[omega_val]["n"][n] = dict_pts
     return data
 
